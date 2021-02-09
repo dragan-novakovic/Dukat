@@ -5,5 +5,5 @@ pub struct Transaction {
     pub reciever: String,
     pub amount: i64,
     pub time: DateTime<Utc>,
-    pub hash: i32,
+    pub hash: String,
 }

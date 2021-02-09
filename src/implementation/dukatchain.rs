@@ -5,7 +5,7 @@ use crate::models::dukatchain::DukatChain;
 use crate::models::transaction::Transaction;
 
 impl DukatChain {
-    fn add_block() {}
+    pub fn add_block() {}
     fn get_last_block() {}
     fn add_transaction() {}
     fn add_genesis_block(&mut self) {
@@ -15,7 +15,7 @@ impl DukatChain {
             sender: String::from("Root"),
             reciever: String::from("Zero"),
             amount: 10,
-            hash: 111,
+            hash: Dukat::calculate_hash(Utc::now()),
             time: Utc::now(),
         };
 
@@ -23,7 +23,7 @@ impl DukatChain {
 
         let genesis_block = Dukat {
             index: 0,
-            hash: 11,
+            hash: Dukat::calculate_hash(Utc::now()),
             time: Utc::now(),
             transactions,
             prev_hash: None,
