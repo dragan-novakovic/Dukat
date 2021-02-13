@@ -1,36 +1,39 @@
-use chrono::prelude::*;
+// use chrono::prelude::*;
+use std::fmt::{self, Debug, Formatter};
 
-use crate::models::dukat::Dukat;
-use crate::models::dukatchain::DukatChain;
-use crate::models::transaction::Transaction;
+use crate::implementation::dukat::Dukat;
+use crate::implementation::transaction::Transaction;
+
+pub struct DukatChain {
+    pub chain: Vec<Dukat>,
+    pub pending_transactions: Vec<Transaction>,
+}
 
 impl DukatChain {
-    pub fn add_block() {}
-    fn get_last_block() {}
-    fn add_transaction() {}
+    pub fn new() -> Self {
+        let mut chain = DukatChain {
+            chain: vec![],
+            pending_transactions: vec![],
+        };
+
+        DukatChain::add_genesis_block(&mut chain);
+
+        chain
+    }
+
     fn add_genesis_block(&mut self) {
         let mut transactions: Vec<Transaction> = vec![];
 
-        let genesis_transaction = Transaction {
-            sender: String::from("Root"),
-            reciever: String::from("Zero"),
-            amount: 10,
-            hash: Dukat::calculate_hash(Utc::now()),
-            time: Utc::now(),
-        };
-
+        let genesis_transaction = Transaction::new("Root".to_owned(), "First".to_owned(), 1);
         transactions.push(genesis_transaction);
 
-        let genesis_block = Dukat {
-            index: 0,
-            hash: Dukat::calculate_hash(Utc::now()),
-            time: Utc::now(),
-            transactions,
-            prev_hash: None,
-        };
-
+        let genesis_block = Dukat::new(0, vec![], vec![0; 32], "GENESIS".to_owned());
         self.chain.push(genesis_block)
     }
+
+    pub fn _add_block() {}
+    pub fn _add_pending_transaction() {}
+
     // register node
     // resolve conficts
     // minePending
@@ -38,4 +41,10 @@ impl DukatChain {
     // isValid Chain
     // genereate KEys
     // chainJSON encode
+}
+
+impl Debug for DukatChain {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        write!(f, "BlockChain:\n {:#?}", &self.chain)
+    }
 }

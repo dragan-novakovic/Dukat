@@ -1,6 +1,11 @@
 mod implementation;
-mod models;
+mod utils;
+
+use implementation::dukatchain::DukatChain;
 
 fn main() {
     println!("Hello, world!");
+    let blockchain = DukatChain::new();
+
+    dbg!(blockchain);
 }
