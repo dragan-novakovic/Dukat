@@ -20,14 +20,17 @@ impl Dukat {
         prev_hash: Vec<u8>,
         payload: String,
     ) -> Self {
-        Dukat {
+        let mut block = Dukat {
             index,
             transactions,
             time: Utc::now(),
             hash: vec![0; 32],
             prev_hash,
             payload,
-        }
+        };
+
+        block.hash = Dukat::hash(&block);
+        block
     }
     pub fn _mine_block() {}
 }
