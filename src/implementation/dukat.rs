@@ -2,7 +2,7 @@ use chrono::prelude::*;
 use std::fmt::{self, Debug, Formatter};
 
 use crate::implementation::transaction::Transaction;
-use crate::utils::hashable::{difficulty_bytes_as_u128, u128_bytes, Hashable};
+use crate::utils::hashable::{difficulty_bytes_as_u128, u128_bytes, u64_bytes, Hashable};
 
 pub struct Dukat {
     pub index: u128,
@@ -22,7 +22,6 @@ impl Dukat {
         prev_hash: Vec<u8>,
         payload: String,
         difficulty: u128,
-        nonce: u64,
     ) -> Self {
         let mut block = Dukat {
             index,
@@ -32,7 +31,7 @@ impl Dukat {
             prev_hash,
             payload,
             difficulty,
-            nonce,
+            nonce: 0,
         };
 
         block.hash = Dukat::hash(&block);
@@ -42,7 +41,7 @@ impl Dukat {
         for nonce_attempt in 0..(u64::max_value()) {
             self.nonce = nonce_attempt;
             let hash = self.hash();
-
+            println!("Trying {}", nonce_attempt);
             if Dukat::check_difficulty(&hash, self.difficulty) {
                 self.hash = hash;
                 return;
@@ -51,6 +50,11 @@ impl Dukat {
     }
 
     pub fn check_difficulty(hash: &Vec<u8>, difficulty: u128) -> bool {
+        println!(
+            "difficulty {} and {}",
+            difficulty,
+            difficulty_bytes_as_u128(&hash),
+        );
         difficulty > difficulty_bytes_as_u128(&hash)
     }
 }
@@ -62,6 +66,7 @@ impl Hashable for Dukat {
         bytes.extend(&u128_bytes(&self.index));
         bytes.extend(&self.time.timestamp().to_be_bytes());
         bytes.extend(self.payload.as_bytes());
+        bytes.extend(&u64_bytes(&self.nonce));
         bytes.extend(&u128_bytes(&self.difficulty));
 
         bytes

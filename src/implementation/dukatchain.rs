@@ -28,17 +28,17 @@ impl DukatChain {
         let genesis_transaction = Transaction::new("Root".to_owned(), "First".to_owned(), 1);
         transactions.push(genesis_transaction);
 
-        let genesis_block = Dukat::new(0, vec![], vec![0; 32], "GENESIS".to_owned(), 0, 0);
+        let genesis_block = Dukat::new(0, vec![], vec![0; 32], "GENESIS".to_owned(), 0);
         self.chain.push(genesis_block)
     }
 
-    pub fn add_block(block: Dukat) {
+    pub fn add_block(&mut self, block: Dukat) {
         //last hash
-
         //verify
+        self.chain.push(block);
     }
 
-    pub fn verify(&self) -> bool {
+    pub fn _verify(&self) -> bool {
         for (i, block) in self.chain.iter().enumerate() {
             if block.index != i as u128 {
                 println!("Index mismatch {} != {}", &block.index, &i);

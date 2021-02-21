@@ -18,5 +18,5 @@ impl Transaction {
             hash: vec![0; 32],
         }
     }
-    pub fn _sign_transactions() {}
+    pub fn _sign_transactions(&mut self, _key: String, _sender_key: String) {}
 }

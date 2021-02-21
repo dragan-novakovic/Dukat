@@ -20,18 +20,18 @@ pub trait Hashable {
 //     ]
 // }
 
-// pub fn u64_bytes(u: &u64) -> [u8; 8] {
-//     [
-//         (u >> 8 * 0x0) as u8,
-//         (u >> 8 * 0x1) as u8,
-//         (u >> 8 * 0x2) as u8,
-//         (u >> 8 * 0x3) as u8,
-//         (u >> 8 * 0x4) as u8,
-//         (u >> 8 * 0x5) as u8,
-//         (u >> 8 * 0x6) as u8,
-//         (u >> 8 * 0x7) as u8,
-//     ]
-// }
+pub fn u64_bytes(u: &u64) -> [u8; 8] {
+    [
+        (u >> 8 * 0x0) as u8,
+        (u >> 8 * 0x1) as u8,
+        (u >> 8 * 0x2) as u8,
+        (u >> 8 * 0x3) as u8,
+        (u >> 8 * 0x4) as u8,
+        (u >> 8 * 0x5) as u8,
+        (u >> 8 * 0x6) as u8,
+        (u >> 8 * 0x7) as u8,
+    ]
+}
 
 pub fn u128_bytes(u: &u128) -> [u8; 16] {
     [
