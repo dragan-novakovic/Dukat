@@ -7,21 +7,27 @@ use implementation::transaction::Transaction;
 use neon::prelude::*;
 use std::convert::TryInto;
 
-fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
-    Ok(cx.string("hello node"))
+declare_types! {
+    /// JS class wrapping Employee records.
+    pub class JsDukatChain for DukatChain {
+        init(mut cx) {
+            Ok(DukatChain::new())
+        }
+    }
 }
-
-register_module!(mut cx, { cx.export_function("hello", hello) });
+// Export the class
+register_module!(mut m, {
+    // <JsEmployee> tells neon what class we are exporting
+    // "Employee" is the name of the export that the class is exported as
+    m.export_class::<JsDukatChain>("DukatChain")?;
+    Ok(())
+});
 
 /*
 
 
 
 fn main() {
-
-
-    let mut blockchain = DukatChain::new();
-    // get seed?
 
     let first_transaction = Transaction::new("Player1".to_owned(), "Player2".to_owned(), 100);
     let second_transaction = Transaction::new("Player2".to_owned(), "Player3".to_owned(), 150);
