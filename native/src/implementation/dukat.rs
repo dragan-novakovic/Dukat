@@ -81,12 +81,14 @@ impl Debug for Dukat {
             timestamp: {},
             nonce: {},
             payload: {}
+            transactions: {:?}
             "#,
             &self.index,
             hex::encode(&self.hash),
             &self.time,
             &self.nonce,
-            &self.payload
+            &self.payload,
+            &self.transactions
         )
     }
 }

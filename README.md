@@ -1,2 +1,0 @@
-# Dukat
-Initial blockchain model

@@ -20,7 +20,9 @@ impl Transaction {
             hash: vec![0; 32],
         }
     }
-    pub fn _sign_transactions(&mut self, _key: String, _sender_key: String) {}
+    pub fn _sign_transactions(&mut self, _key: String, _sender_key: String) {
+        // TO-DO
+    }
 }
 
 impl Hashable for Transaction {
@@ -40,7 +42,7 @@ impl Debug for Transaction {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         write!(
             f,
-            r#"Transaction[]:,
+            r#"Tx:,
             sender: {},
             receiver: {},
             amount: {},

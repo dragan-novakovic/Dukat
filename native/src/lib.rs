@@ -1,3 +1,13 @@
+use neon::prelude::*;
+
+fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
+    Ok(cx.string("hello node"))
+}
+
+register_module!(mut cx, { cx.export_function("hello", hello) });
+
+/*
+
 mod implementation;
 mod utils;
 
@@ -11,6 +21,7 @@ fn main() {
     let difficulty = 0x000fffffffffffffffffffffffffffff as u128;
 
     let mut blockchain = DukatChain::new();
+    // get seed?
 
     let first_transaction = Transaction::new("Player1".to_owned(), "Player2".to_owned(), 100);
     let second_transaction = Transaction::new("Player2".to_owned(), "Player3".to_owned(), 150);
@@ -32,3 +43,8 @@ fn main() {
 
     dbg!(blockchain);
 }
+
+
+
+
+*/
