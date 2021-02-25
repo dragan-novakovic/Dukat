@@ -49,6 +49,10 @@ impl Dukat {
         }
     }
 
+    pub fn default_difficulty() -> u128 {
+        0x000fffffffffffffffffffffffffffff
+    }
+
     pub fn check_difficulty(hash: &Vec<u8>, difficulty: u128) -> bool {
         println!(
             "difficulty {} and {}",

@@ -1,4 +1,11 @@
+mod implementation;
+mod utils;
+
+use implementation::dukat::Dukat;
+use implementation::dukatchain::DukatChain;
+use implementation::transaction::Transaction;
 use neon::prelude::*;
+use std::convert::TryInto;
 
 fn hello(mut cx: FunctionContext) -> JsResult<JsString> {
     Ok(cx.string("hello node"))
@@ -8,17 +15,10 @@ register_module!(mut cx, { cx.export_function("hello", hello) });
 
 /*
 
-mod implementation;
-mod utils;
 
-use std::convert::TryInto;
-
-use implementation::dukat::Dukat;
-use implementation::dukatchain::DukatChain;
-use implementation::transaction::Transaction;
 
 fn main() {
-    let difficulty = 0x000fffffffffffffffffffffffffffff as u128;
+
 
     let mut blockchain = DukatChain::new();
     // get seed?
