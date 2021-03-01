@@ -8,11 +8,14 @@ use std::convert::TryInto;
 
 use wasm_bindgen::prelude::*;
 
+// import from web
+
 #[wasm_bindgen]
 extern "C" {
     fn alert(s: String);
 }
 
+// export to js
 #[wasm_bindgen]
 pub fn greet(name: String) {
     unsafe {
@@ -20,7 +23,8 @@ pub fn greet(name: String) {
     }
 }
 
-pub fn init() {
+#[wasm_bindgen]
+pub fn init() -> DukatChain {
     let mut blockchain = DukatChain::new();
 
     let first_transaction = Transaction::new("Player1".to_owned(), "Player2".to_owned(), 100);
@@ -42,4 +46,6 @@ pub fn init() {
     blockchain.add_block(first_block);
 
     dbg!(blockchain);
+
+    blockchain
 }

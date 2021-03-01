@@ -1,16 +1,18 @@
 // use chrono::prelude::*;
-use std::fmt::{self, Debug, Formatter};
-
 use crate::implementation::dukat::Dukat;
 use crate::implementation::transaction::Transaction;
 use crate::utils::hashable::Hashable;
+use std::fmt::{self, Debug, Formatter};
+use wasm_bindgen::prelude::*;
 
+#[wasm_bindgen]
 pub struct DukatChain {
     pub chain: Vec<Dukat>,
     pub pending_transactions: Vec<Transaction>,
 }
 
 impl DukatChain {
+    #[wasm_bindgen(constructor)]
     pub fn new() -> Self {
         let mut chain = DukatChain {
             chain: vec![],

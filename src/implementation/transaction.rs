@@ -1,7 +1,9 @@
 use crate::utils::hashable::{u64_bytes, Hashable};
 use chrono::prelude::*;
 use std::fmt::{self, Debug, Formatter};
+use wasm_bindgen::prelude::*;
 
+#[wasm_bindgen]
 pub struct Transaction {
     pub sender: String,
     pub receiver: String,
@@ -11,6 +13,7 @@ pub struct Transaction {
 }
 
 impl Transaction {
+    #[wasm_bindgen(constructor)]
     pub fn new(sender: String, receiver: String, amount: u64) -> Self {
         Transaction {
             sender,

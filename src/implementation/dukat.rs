@@ -1,9 +1,10 @@
-use chrono::prelude::*;
-use std::fmt::{self, Debug, Formatter};
-
 use crate::implementation::transaction::Transaction;
 use crate::utils::hashable::{difficulty_bytes_as_u128, u128_bytes, u64_bytes, Hashable};
+use chrono::prelude::*;
+use std::fmt::{self, Debug, Formatter};
+use wasm_bindgen::prelude::*;
 
+#[wasm_bindgen]
 pub struct Dukat {
     pub index: u128,
     pub hash: Vec<u8>,
@@ -16,6 +17,7 @@ pub struct Dukat {
 }
 
 impl Dukat {
+    #[wasm_bindgen(constructor)]
     pub fn new(
         index: u128,
         transactions: Vec<Transaction>,
