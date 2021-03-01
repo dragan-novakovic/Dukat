@@ -1,21 +1,16 @@
 [package]
-name = "simple_node"
+name = "dukat"
 version = "0.1.0"
 authors = ["dragan1810 <d.novakovic1810@yahoo.com>"]
 license = "MIT"
-build = "build.rs"
 edition = "2018"
-exclude = ["artifacts.json", "index.node"]
 
 [lib]
-name = "simple_node"
 crate-type = ["cdylib"]
 
-[build-dependencies]
-neon-build = "0.7.1"
 
 [dependencies]
-neon = "0.7.1"
 chrono = "0.4"
 sha2 = "0.9"
 hex = "0.4.2"
+wasm-bindgen = "0.2.71"
