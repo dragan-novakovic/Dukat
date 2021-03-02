@@ -6,24 +6,23 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub struct Dukat {
-    pub index: u128,
+    pub index: u64,
     pub hash: Vec<u8>,
-    pub time: DateTime<Utc>,
+    pub time: i64,
     pub transactions: Vec<Transaction>,
     pub prev_hash: Vec<u8>,
     pub payload: String,
-    pub difficulty: u128,
+    pub difficulty: u64,
     pub nonce: u64,
 }
 
 impl Dukat {
-    #[wasm_bindgen(constructor)]
     pub fn new(
-        index: u128,
+        index: u64,
         transactions: Vec<Transaction>,
         prev_hash: Vec<u8>,
         payload: String,
-        difficulty: u128,
+        difficulty: u64,
     ) -> Self {
         let mut block = Dukat {
             index,
@@ -51,11 +50,11 @@ impl Dukat {
         }
     }
 
-    pub fn default_difficulty() -> u128 {
+    pub fn default_difficulty() -> u64 {
         0x000fffffffffffffffffffffffffffff
     }
 
-    pub fn check_difficulty(hash: &Vec<u8>, difficulty: u128) -> bool {
+    pub fn check_difficulty(hash: &Vec<u8>, difficulty: u64) -> bool {
         println!(
             "difficulty {} and {}",
             difficulty,

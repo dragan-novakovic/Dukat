@@ -1,25 +1,26 @@
 use crate::utils::hashable::{u64_bytes, Hashable};
 use chrono::prelude::*;
+use serde::{Deserialize, Serialize};
 use std::fmt::{self, Debug, Formatter};
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
+#[derive(Serialize, Deserialize)]
 pub struct Transaction {
     pub sender: String,
     pub receiver: String,
     pub amount: u64,
-    pub time: DateTime<Utc>,
+    pub time: i64,
     pub hash: Vec<u8>,
 }
 
 impl Transaction {
-    #[wasm_bindgen(constructor)]
     pub fn new(sender: String, receiver: String, amount: u64) -> Self {
         Transaction {
             sender,
             receiver,
             amount,
-            time: Utc::now(),
+            time: Utc::timestamp(Utc::now()),
             hash: vec![0; 32],
         }
     }
